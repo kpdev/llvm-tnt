@@ -58,12 +58,12 @@ Error LoadDIA(CComPtr<IDiaDataSource> &DiaDataSource) {
 #endif
 
   const wchar_t *msdia_dll = nullptr;
-#if _MSC_VER == 1900
+#if _MSC_VER == 1900 || _MSC_VER == 1912
   msdia_dll = L"msdia140.dll"; // VS2015
 #elif _MSC_VER == 1800
   msdia_dll = L"msdia120.dll"; // VS2013
 #else
-#error "Unknown Visual Studio version."
+  #error "Unknown Visual Studio version."
 #endif
 
   HRESULT HR;

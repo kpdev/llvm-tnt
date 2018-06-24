@@ -64,6 +64,7 @@ const char *Triple::getArchTypeName(ArchType Kind) {
   case shave:          return "shave";
   case wasm32:         return "wasm32";
   case wasm64:         return "wasm64";
+  case tnt:            return "tnt";
   case renderscript32: return "renderscript32";
   case renderscript64: return "renderscript64";
   }
@@ -134,6 +135,7 @@ const char *Triple::getArchTypePrefix(ArchType Kind) {
   case shave:       return "shave";
   case wasm32:
   case wasm64:      return "wasm";
+  case tnt:         return "tnt";
   }
 }
 
@@ -282,6 +284,7 @@ Triple::ArchType Triple::getArchTypeForLLVMName(StringRef Name) {
     .Case("kalimba", kalimba)
     .Case("lanai", lanai)
     .Case("shave", shave)
+    .Case("tnt", tnt)
     .Case("wasm32", wasm32)
     .Case("wasm64", wasm64)
     .Case("renderscript32", renderscript32)
@@ -393,6 +396,7 @@ static Triple::ArchType parseArch(StringRef ArchName) {
     .StartsWith("kalimba", Triple::kalimba)
     .Case("lanai", Triple::lanai)
     .Case("shave", Triple::shave)
+    .Case("tnt", Triple::tnt)
     .Case("wasm32", Triple::wasm32)
     .Case("wasm64", Triple::wasm64)
     .Case("renderscript32", Triple::renderscript32)
@@ -614,6 +618,7 @@ static Triple::ObjectFormatType getDefaultFormat(const Triple &T) {
   case Triple::systemz:
   case Triple::tce:
   case Triple::thumbeb:
+  case Triple::tnt:
   case Triple::wasm32:
   case Triple::wasm64:
   case Triple::xcore:
@@ -1145,6 +1150,7 @@ static unsigned getArchPointerBitWidth(llvm::Triple::ArchType Arch) {
   case llvm::Triple::kalimba:
   case llvm::Triple::lanai:
   case llvm::Triple::shave:
+  case llvm::Triple::tnt:
   case llvm::Triple::wasm32:
   case llvm::Triple::renderscript32:
     return 32;
@@ -1221,6 +1227,7 @@ Triple Triple::get32BitArchVariant() const {
   case Triple::xcore:
   case Triple::lanai:
   case Triple::shave:
+  case Triple::tnt:
   case Triple::wasm32:
   case Triple::renderscript32:
     // Already 32-bit.
